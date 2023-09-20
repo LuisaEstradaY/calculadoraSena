@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Científica</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+/* Contenedor para centrar el campo de pantalla */
+#screen-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0 auto;
+    max-width: 90%; 
+}
+
+#screen {
+    background-color: #dbdbdb; /* Rosa claro */
+    color: #959393;
+    font-size: 36px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: right;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    outline: none; /* Elimina el contorno al hacer clic */
+}
+
+/* Efecto de entrada al enfocar el campo */
+#screen:focus {
+    background-color: #ff99b3; /* Rosa más oscuro al enfocar */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 450px;
+    background-color: #ffb3cc; /* Rosa claro */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.display {
+    background-color: #ffcccc; /* Rosa claro */
+    color: #fff;
+    font-size: 28px;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: right;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    width: 95%;
+    outline: none;
+}
+
+.row button {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.row button.special {
+    background-color: #ff99b3; /* Rosa más oscuro */
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.row button.number {
+    background-color: #ff6666; /* Rosa oscuro */
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.row button.equal {
+    background-color: #ff99b3; /* Rosa más oscuro */
+    color: white;
+    width: 110px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.row button:hover {
+    transform: scale(1.05);
+}
+
+.row button.special:hover {
+    background-color: #ff6699; /* Rosa más oscuro al hacer hover */
+}
+
+.row button.equal:hover {
+    background-color: #ff6699; /* Rosa más oscuro al hacer hover */
+}
+</style>
+<body>
+    <div class="container">
+        <div class="display" id="screen-container">
+            <input id="screen" type="text" placeholder="0">
+        </div>
+
+        <div class="btns">
+            <div class="row">
+                <button id="ce" class="special" onclick="clearScreen()">CE</button>
+                <button id="ac" class="special" onclick="clearAll()">AC</button>
+                <button class="special" onclick="calculateFactorial()">x!</button>
+                <button class="special" onclick="appendText('(')">(</button>
+                <button class="special" onclick="appendText(')')">)</button>
+                <button class="special" onclick="calculatePercentage()">%</button>
+                <button class="special" onclick="calculateLog()">ln</button>
+                <button class="special" onclick="insertPI()">π</button>
+                <button class="special" onclick="calculateInverseTrig('sin')">sin⁻¹</button>
+                <button class="special" onclick="calculateInverseTrig('cos')">cos⁻¹</button>
+                <button class="special" onclick="calculateInverseTrig('tan')">tan⁻¹</button>
+                <button class="special" onclick="calculateTrig('sin')">sin</button>
+                <button class="special" onclick="calculateTrig('cos')">cos</button>
+                <button class="special" onclick="calculateTrig('tan')">tan</button>
+                <button class="special" onclick="changeSign()">+/-</button>
+                <button class="special" onclick="appendText('+')">+</button>
+                <button class="special" onclick="appendText('-')">-</button>
+                <button class="special" onclick="appendText('/')">÷</button>
+                <button class="special" onclick="appendText('*')">×</button>
+            </div>
+            <div class="row">
+                <button class="number" onclick="appendNumber(7)">7</button>
+                <button class="number" onclick="appendNumber(8)">8</button>
+                <button class="number" onclick="appendNumber(9)">9</button>
+            </div>
+            <div class="row">
+                <button class="number" onclick="appendNumber(4)">4</button>
+                <button class="number" onclick="appendNumber(5)">5</button>
+                <button class="number" onclick="appendNumber(6)">6</button>
+            </div>
+            <div class="row">
+                <button class="number" onclick="appendNumber(1)">1</button>
+                <button class="number" onclick="appendNumber(2)">2</button>
+                <button class="number" onclick="appendNumber(3)">3</button>
+            </div>
+            <div class="row">
+                <button class="number" onclick="appendNumber(0)">0</button>
+                <button class="number" onclick="appendDecimal()">.</button>
+                <button class="equal" onclick="calculate()">=</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js">
+    </script>
+</body>
+</html>
